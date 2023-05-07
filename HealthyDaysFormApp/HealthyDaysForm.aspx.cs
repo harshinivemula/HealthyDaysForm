@@ -41,7 +41,7 @@ namespace HealthyDaysFormApp
                 string timeOfDay = string.Join(", ", GetSelectedTimeOfDay());
 
                 string result = $"<h3>Submitted Answers</h3><br/>" +
-                                $"1. Was discharge completed without client present? {discharge}<br/>";
+                $"1. Was discharge completed without client present? {discharge}<br/>";
 
                 if (pnlQuestions.Visible)
                 {
@@ -51,12 +51,14 @@ namespace HealthyDaysFormApp
                               $"5. Time of day experiencing health issues: {timeOfDay}<br/>";
                 }
 
-                Response.Write(result);
+                Session["SubmittedAnswers"] = result; 
+                Response.Redirect("SubmittedAnswers.aspx"); 
             }
             else
             {
                 Response.Write("Please complete the required fields.");
             }
+
         }
 
         private bool IsValidForm()
@@ -75,12 +77,45 @@ namespace HealthyDaysFormApp
                     return false;
                 }
 
-                bool isPhysicalHealthValid = int.TryParse(txtPhysicalHealth.Text, out _);
-                bool isMentalHealthValid = int.TryParse(txtMentalHealth.Text, out _);
-                if (!isPhysicalHealthValid || !isMentalHealthValid)
+                int physicalHealthDays = int.Parse(txtPhysicalHealth.Text);
+                int mentalHealthDays = int.Parse(txtMentalHealth.Text);
+                if ((physicalHealthDays < 0 && (mentalHealthDays < 0 || mentalHealthDays > 30)) || (mentalHealthDays < 0 && (physicalHealthDays < 0 || physicalHealthDays > 30)))
                 {
+
+                    Response.Write("Please select a positive value between 0 and 30 for questions 3 and 4.");
                     return false;
                 }
+                else if (physicalHealthDays > 30 && mentalHealthDays > 30)
+                {
+                    Response.Write("Please select a value between 0 and 30 for questions 3 and 4.");
+                    return false;
+                }
+                else if (physicalHealthDays > 30)
+                {
+                    Response.Write("Please select a value between 0 and 30 for question 3.");
+                    return false;
+                }
+                else if (mentalHealthDays > 30)
+                {
+                    Response.Write("Please select a value between 0 and 30 for question 4.");
+                    return false;
+                }
+                else if (physicalHealthDays < 0)
+                {
+                    Response.Write("Please select a positive value between 0 and 30 for question 3.");
+                    return false;
+                }
+                else if (mentalHealthDays < 0)
+                {
+                    Response.Write("Please select a positive value between 0 and 30 for question 4.");
+                    return false;
+                }
+                else if (physicalHealthDays > 30 || mentalHealthDays > 30)
+                {
+                    Response.Write("Please select a value between 0 and 30 for questions 3 and 4.");
+                    return false;
+                }
+
             }
 
             return true;

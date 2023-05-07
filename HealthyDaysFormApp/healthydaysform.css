@@ -1,0 +1,55 @@
+﻿body {
+    background-color: #40a8c4;
+    background-image: linear-gradient(to bottom right, #40a8c4, #66c2a5);
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+#form1 {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #0072c6;
+    text-shadow: 0 2px 4px rgba(0,0,0,.5);
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="radio"], input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    background-color: #0072c6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    input[type="submit"]:hover {
+        background-color: #005ba1;
+    }
+
+form {
+    margin-bottom: 0;
+}
+
+#submittedAnswers {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+}
